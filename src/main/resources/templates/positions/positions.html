@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="${title}"></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+</head>
+<body>
+<div th:insert="header :: header"></div>
+<br>
+<a href="/positions/add"><button type="button" class="btn btn-success">Добавить должность</button></a>
+<br>
+<br>
+
+<table  class="table table-bordered">
+    <thead>
+    <tr>
+        <th>Название должности</th>
+    </tr>
+    </thead>
+    <tbody >
+    <tr th:each="pos : ${positions}">
+        <td th:text="${pos.name}"></td>
+        <td><a th:href="'/positions/edit/' + ${pos.id} "><button type="button" class="btn btn-warning">Редактировать</button></a></td>
+        <td>
+            <form method="post" th:action="'/positions/delete/' + ${pos.id} ">
+                <button class="btn btn-danger" type="submit">Удалить</button>
+            </form></td>
+    </tbody>
+</table>
+</body>
+</html>
